@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SingUp from '../../Authentication/SingUP/SingUp';
+import LogIn from '../../Authentication/LogIn/LogIn';
 
 const Navber=()=>{
 
   return ( <div >
-    <div className="navbar lg:bg-[#e1e1e1] md:bg-[#e1e1e1] bg-white pt-10">
+    <div className="navbar lg:bg-[#e1e1e1] md:bg-[#e1e1e1] bg-white lg:pt-10 md:pt-10 lg:pb-10 md:pb-10 pt-5 pb-5">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -37,20 +39,14 @@ const Navber=()=>{
   </div>
   <div className="navbar-end">
   <a className="btn btn-ghost lg:hidden  md:hidden text-xl">BD Travel</a>
-  <p className='lg:inline md:inline hidden text-xl mr-10'><Link to='/singup'>Sign Up</Link></p>
-  <p className='lg:inline md:inline hidden text-xl mr-10'><Link to='/login'>Log In</Link></p>
+  <button className=" lg:inline md:inline hidden text-xl mr-10" onClick={()=>document.getElementById('my_modal_5').showModal()}>Log In</button>
+
+  <LogIn></LogIn>
+  <p className=''></p>
+  {/* <p className='lg:inline md:inline hidden text-xl mr-10'><Link to='/login'>Log In</Link></p> */}
   </div>
 </div>
-    <div className='bg-[#e1e1e1]  flex justify-center lg:pb-32 md:pb-32 lg:pt-24 md:pt-24 pb-20 pt-16'>
-      <div>
-      <p className='text-xl mb-5 lg:ml-14 md:ml-12 ml-5 font-serif'>Destination</p>
-      <p className='lg:text-5xl md:text-5xl text-3xl font-sans'>Bangladesh</p>
-
-      </div>
-      
-
-
-    </div>
+    
 
   </div>
   )
