@@ -51,7 +51,7 @@ const Navber=()=>{
   <div className="navbar-end">
   <a className="btn btn-ghost lg:hidden  md:hidden text-xl">BD Travel</a>
 
-  {user?.uid?<><p className='mr-10 text-xl'>{user.email}</p>
+  {user?.uid?<><p className='mr-10 text-xl'>{user.displayName}</p>
   <button onClick={logoutHandler}>Log Out</button>
   <p ></p>
   </>:<button className=" lg:inline md:inline hidden text-xl mr-10" onClick={()=>document.getElementById('my_modal_5').showModal()}>Log In</button>}

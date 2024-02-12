@@ -4,7 +4,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const SingUp=()=>{
-  const {createEmailPassword}=useContext(AuthContext)
+  const {createEmailPassword,updataData}=useContext(AuthContext)
 
   const [isChecked, setIsChecked] = useState(false);
   const handleCheckboxChange = (event) => {
@@ -26,9 +26,12 @@ const SingUp=()=>{
     const BirthDate=form.BirthDate.value;
     const email=form.email.value;
     const Country=form.Country.value;
+    const phone=form.phone.value;
+
+    profileupdate(username,phone)
    
 
-    console.log(username,password,confrimpassworld,BirthDate,Country,isChecked,email,firstname,lastname)
+    console.log(username,password,confrimpassworld,BirthDate,Country,isChecked,email,firstname,lastname,phone)
 
     createEmailPassword(email,password)
     .then(result=>{
@@ -44,7 +47,22 @@ const SingUp=()=>{
     seterrormessges('')
 
   }
- 
+
+  const profileupdate=(name,phone)=>{
+    const profile={
+      displayName:name,
+      phoneNumber:phone,
+    }
+    updataData(profile)
+    .then(result=>{
+      const user =result.user
+      console.log(user)
+    })
+    .catch(error=>{console.error("error",error)
+    const message=error.message;
+      
+  })
+  }
     
     return(
     <div>
