@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import SingUp from '../../Authentication/SingUP/SingUp';
 import LogIn from '../../Authentication/LogIn/LogIn';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Navber=()=>{
+  // const {name}=useContext(AuthContext)
 
   return ( <div >
     <div className="navbar lg:bg-[#e1e1e1] md:bg-[#e1e1e1] bg-white lg:pt-10 md:pt-10 lg:pb-10 md:pb-10 pt-5 pb-5">
@@ -34,6 +36,7 @@ const Navber=()=>{
         <p className='mr-10 text-xl'><Link to='/blogs'>Blogs</Link></p>
         <p className='mr-10 text-xl'><Link to='/'>Tour List</Link></p>
         <p className='mr-10 text-xl'><Link to='/'>Room List</Link></p>
+       
         
     </ul>
   </div>
