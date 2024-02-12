@@ -5,7 +5,14 @@ import LogIn from '../../Authentication/LogIn/LogIn';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Navber=()=>{
-  // const {name}=useContext(AuthContext)
+  const {name,user,logOut}=useContext(AuthContext)
+
+  const logoutHandler=()=>{
+    logOut()
+    .then(()=>{})
+    .then(error=>console.log(error))
+
+  }
 
   return ( <div >
     <div className="navbar lg:bg-[#e1e1e1] md:bg-[#e1e1e1] bg-white lg:pt-10 md:pt-10 lg:pb-10 md:pb-10 pt-5 pb-5">
@@ -36,16 +43,22 @@ const Navber=()=>{
         <p className='mr-10 text-xl'><Link to='/blogs'>Blogs</Link></p>
         <p className='mr-10 text-xl'><Link to='/'>Tour List</Link></p>
         <p className='mr-10 text-xl'><Link to='/'>Room List</Link></p>
+        
        
         
     </ul>
   </div>
   <div className="navbar-end">
   <a className="btn btn-ghost lg:hidden  md:hidden text-xl">BD Travel</a>
-  <button className=" lg:inline md:inline hidden text-xl mr-10" onClick={()=>document.getElementById('my_modal_5').showModal()}>Log In</button>
 
+  {user?.uid?<><p className='mr-10 text-xl'>{user.email}</p>
+  <button onClick={logoutHandler}>Log Out</button>
+  <p ></p>
+  </>:<button className=" lg:inline md:inline hidden text-xl mr-10" onClick={()=>document.getElementById('my_modal_5').showModal()}>Log In</button>}
+  
+  
   <LogIn></LogIn>
-  <p className=''></p>
+  
   {/* <p className='lg:inline md:inline hidden text-xl mr-10'><Link to='/login'>Log In</Link></p> */}
   </div>
 </div>

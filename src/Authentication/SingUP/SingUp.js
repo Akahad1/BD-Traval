@@ -1,22 +1,50 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 
 const SingUp=()=>{
+  const {createEmailPassword}=useContext(AuthContext)
+
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+   
+  };
+
+  const [errormessages,seterrormessges]=useState('')
 
   const getInformation=(event)=>{
+
     event.preventDefault()
     const form=event.target;
     const username=form.username.value;
+    const firstname=form.firstname.value;
+    const lastname=form.lastname.value;
     const password=form.password.value;
     const confrimpassworld=form.confrimpassworld.value;
     const BirthDate=form.BirthDate.value;
-    const Country=form.Country.value
+    const email=form.email.value;
+    const Country=form.Country.value;
+   
 
-    console.log(username,password,confrimpassworld,BirthDate,Country)
+    console.log(username,password,confrimpassworld,BirthDate,Country,isChecked,email,firstname,lastname)
 
+    createEmailPassword(email,password)
+    .then(result=>{
+      const user=result.user;
+      console.log(user)
+      form.reset()
+    })
+    .catch(error=>{console.log(error)
+      const messages =error.message;
+      seterrormessges(messages)
+     
+    })
+    seterrormessges('')
 
   }
+ 
     
     return(
     <div>
@@ -41,7 +69,7 @@ const SingUp=()=>{
           </div>
           <div className="lg:ml-10 md:ml-6">
             <p className="text-xl">Confrim Password</p>
-            <input name="confrimpassworld" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80"></input>
+            <input name="confrimpassworld" type="password" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80"></input>
           </div>
         
         </div>
@@ -50,7 +78,7 @@ const SingUp=()=>{
         <div className=" lg:flex md:flex mt-5 ">
           <div className="">
           <p className="text-xl">First Name*</p>
-          <input name="firstname" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80 " required ></input>
+          <input name="firstname" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80 "  ></input>
           </div>
           <div className="lg:ml-10 md:ml-6">
             <p className="text-xl">Last Name</p>
@@ -62,11 +90,11 @@ const SingUp=()=>{
         <div className=" lg:flex md:flex mt-5 ">
           <div className="">
           <p className="text-xl">Birth Date*</p>
-          <input name="BirthDate" type="date" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80 " required ></input>
+          <input name="BirthDate" type="date" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80 "  ></input>
           </div>
           <div className="lg:ml-10 md:ml-6">
             <p className="text-xl">Email*</p>
-            <input name="email" type="email" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80"></input>
+            <input name="email" type="email" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80" required></input>
           </div>
         
         </div>
@@ -74,7 +102,7 @@ const SingUp=()=>{
           <div className=" lg:flex md:flex mt-5 ">
           <div className="">
           <p className="text-xl">Phone*</p>
-          <input name="phone" type="number" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80 " required ></input>
+          <input name="phone" type="number" className="border border-spacing-10 border-gray-400 mt-3 p-2 w-80 "  ></input>
           </div>
           <div className="lg:ml-10 md:ml-6">
             <p className="text-xl">Country</p>
@@ -82,12 +110,13 @@ const SingUp=()=>{
           </div>
         
         </div>
+        <div><p className="text-red-500">{errormessages}</p></div>
 
-        {/* <label >
-          <input className="mt-10 " type="checkbox"  name="sameadr"/>  Creating an account means you're okay<br/> with our<br/> Terms of Service and Privacy Statement.
-        </label> */}
+        <label >
+          <input onChange={handleCheckboxChange} className="mt-10 " type="checkbox"  name="checkbox" />   Terms of Service and Privacy Statement.
+        </label>
 
-        <button type="submit" className="btn mt-10 w-full">Sing Up</button>
+        <button type="submit" className={isChecked?'btn mt-10 w-full btn-info':'btn mt-10 w-full btn-info btn-disabled'}>Sing Up</button>
       </form>
     </div>
 
